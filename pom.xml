@@ -70,17 +70,14 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 								<links>
 									<link>${javac.link.javaApi}</link>
 									<link>${javac.link.javaeeApi.6}</link>
-									<link>http://www.joda.org/joda-time/apidocs/</link>
 									<link>https://aoindustries.com/ao-encoding/apidocs/</link>
-									<link>https://aoindustries.com/ao-io-buffer/apidocs/</link>
 									<link>https://aoindustries.com/ao-lang/apidocs/</link>
 									<link>https://aoindustries.com/ao-net-types/apidocs/</link>
-									<link>https://aoindustries.com/ao-taglib/apidocs/</link>
+									<link>https://semanticcms.com/core/controller/apidocs/</link>
 									<link>https://semanticcms.com/core/model/apidocs/</link>
 									<link>https://semanticcms.com/core/pages/apidocs/</link>
 									<link>https://semanticcms.com/core/pages/local/apidocs/</link>
 									<link>https://semanticcms.com/core/renderer/html/apidocs/</link>
-									<link>https://semanticcms.com/core/servlet/apidocs/</link>
 									<link>https://semanticcms.com/news/model/apidocs/</link>
 								</links>
 							</configuration>
@@ -99,25 +96,9 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>javax.servlet.jsp-api</artifactId>
-			<version>2.2.1</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-			<version>2.9.9</version>
-		</dependency>
-		<dependency>
 			<groupId>com.aoindustries</groupId>
 			<artifactId>ao-encoding</artifactId>
 			<version>1.6.1-validation-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.aoindustries</groupId>
-			<artifactId>ao-io-buffer</artifactId>
-			<version>3.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.aoindustries</groupId>
@@ -130,9 +111,9 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 			<version>1.1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>com.aoindustries</groupId>
-			<artifactId>ao-taglib</artifactId>
-			<version>3.0.0-SNAPSHOT</version>
+			<groupId>com.semanticcms</groupId>
+			<artifactId>semanticcms-core-controller</artifactId>
+			<version>2.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.semanticcms</groupId>
@@ -152,11 +133,6 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 		<dependency>
 			<groupId>com.semanticcms</groupId>
 			<artifactId>semanticcms-core-renderer-html</artifactId>
-			<version>2.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.semanticcms</groupId>
-			<artifactId>semanticcms-core-servlet</artifactId>
 			<version>2.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
