@@ -87,7 +87,7 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.aoindustries</groupId><artifactId>ao-encoding</artifactId><version>1.7.0-SNAPSHOT</version>
+			<groupId>com.aoindustries</groupId><artifactId>ao-encoding</artifactId><version>1.7.1-validation-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.aoindustries</groupId><artifactId>ao-lang</artifactId><version>2.0.1-validation-SNAPSHOT</version>
