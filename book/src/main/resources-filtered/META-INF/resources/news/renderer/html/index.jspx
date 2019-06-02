@@ -34,7 +34,7 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 		shortTitle="@{documented.shortTitle}"
 		description="@{documented.description}"
 		datePublished="2017-08-26T17:25:01-0500"
-		dateModified="2019-06-01T00:46:53-0500"
+		dateModified="2019-06-01T18:51:51-0500"
 	>
 		<core:child page="changelog" />
 		<core:child page="apidocs/" />
@@ -53,7 +53,7 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 		<p>
 			<core:link book="/news" page="/">SemanticCMS newsfeeds</core:link> rendered as HTML in a Servlet environment.
 		</p>
-		<section:section label="Project Links">
+		<section:nav label="Project Links">
 			<ul>
 				<li><core:link page="/">Project Home</core:link></li>
 				<li><core:link page="changelog">Changelog</core:link></li>
@@ -61,6 +61,6 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 				<li><ao:a href="https://search.maven.org/#search%7Cgav%7C1%7Cg:%22@{documented.groupId}%22%20AND%20a:%22@{documented.artifactId}%22">Maven Central Repository</ao:a></li>
 				<li><ao:a href="@{documented.scm.url}">GitHub</ao:a></li>
 			</ul>
-		</section:section>
+		</section:nav>
 	</core:page>
 </jsp:root>
