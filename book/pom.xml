@@ -111,6 +111,7 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 			<type>pom</type>
 			<scope>provided</scope>
 			<optional>true</optional>
+			<exclusions><exclusion><groupId>*</groupId><artifactId>*</artifactId></exclusion></exclusions>
 		</dependency>
 	</dependencies>
 </project>
