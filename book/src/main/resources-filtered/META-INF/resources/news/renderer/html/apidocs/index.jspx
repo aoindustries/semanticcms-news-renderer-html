@@ -39,5 +39,4 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 		datePublished="2017-08-26T17:25:01-0500"
 		dateModified="${ao:getLastModified('index.html')}"
 	/>
-	<!-- TODO: Pick-up javadocs version, not pom version, in title, here and elsewhere -->
 </jsp:root>
