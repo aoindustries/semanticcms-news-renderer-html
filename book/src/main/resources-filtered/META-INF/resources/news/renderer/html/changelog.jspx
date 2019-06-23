@@ -43,7 +43,7 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 			test="${!fn:startsWith(version, '@')}"
 			message="Version not substituted: #{version}"
 		/>
-		<c:if test="${fn:endsWith(version, '-SNAPSHOT') and !fn:endsWith(version, '-validation-SNAPSHOT')}">
+		<c:if test="${fn:endsWith(version, '-SNAPSHOT') and !fn:endsWith(version, '-POST-SNAPSHOT')}">
 			<changelog:release
 				projectName="@{documented.name}"
 				version="#{version}"
