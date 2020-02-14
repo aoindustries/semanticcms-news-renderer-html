@@ -1,6 +1,6 @@
 /*
  * semanticcms-news-renderer-html - SemanticCMS newsfeeds rendered as HTML in a Servlet environment.
- * Copyright (C) 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,6 +23,7 @@
 package com.semanticcms.news.renderer.html;
 
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
+import com.aoindustries.html.Html;
 import com.semanticcms.core.controller.CapturePage;
 import com.semanticcms.core.controller.PageRefResolver;
 import com.semanticcms.core.controller.SemanticCMS;
@@ -50,7 +51,7 @@ final public class NewsHtmlRenderer {
 		ServletContext servletContext,
 		HttpServletRequest request,
 		HttpServletResponse response,
-		Appendable out,
+		Html html,
 		News news
 	) throws ServletException, IOException {
 		// Get the current capture state
@@ -177,9 +178,9 @@ final public class NewsHtmlRenderer {
 			if(captureLevel == CaptureLevel.BODY) {
 				// Write an empty div so links to this news ID work
 				String refId = PageIndex.getRefIdInPage(request, currentPage, news.getId());
-				out.append("<div class=\"semanticcms-news-anchor\" id=\"");
-				encodeTextInXhtmlAttribute(refId, out);
-				out.append("\"></div>");
+				html.out.append("<div class=\"semanticcms-news-anchor\" id=\"");
+				encodeTextInXhtmlAttribute(refId, html.out);
+				html.out.append("\"></div>");
 				// TODO: Should we show the news entry here when no news view is active?
 				// TODO: Hide from tree views, or leave but link to "news" view when news view is active?
 			}
