@@ -51,9 +51,9 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 
 	<scm>
 		<!-- Can't inherit due to multi-module -->
-		<connection>scm:git:git://github.com/aoindustries/${project.artifactId}.git</connection>
-		<developerConnection>scm:git:git@github.com:aoindustries/${project.artifactId}.git</developerConnection>
-		<url>https://github.com/aoindustries/${project.artifactId}</url>
+		<connection>scm:git:git://github.com/aoindustries/semanticcms-news-renderer-html.git</connection>
+		<developerConnection>scm:git:git@github.com:aoindustries/semanticcms-news-renderer-html.git</developerConnection>
+		<url>https://github.com/aoindustries/semanticcms-news-renderer-html</url>
 		<tag>HEAD</tag>
 	</scm>
 
@@ -91,7 +91,7 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 		<dependencies>
 			<!-- Java EE -->
 			<dependency>
-				<groupId>com.aoindustries</groupId><artifactId>javaee-web-api-bom</artifactId><version>6.0.0${POST-SNAPSHOT}</version>
+				<groupId>com.aoindustries</groupId><artifactId>javaee-web-api-bom</artifactId><version>6.0.1-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
