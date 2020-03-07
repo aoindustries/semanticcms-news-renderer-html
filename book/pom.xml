@@ -35,8 +35,6 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 	<properties>
 		<!-- These values are copied from the project being documented -->
 		<documented.artifactId>semanticcms-news-renderer-html</documented.artifactId>
-		<documented.javaVersion>1.8</documented.javaVersion>
-		<documented.javac.link.javaApi>${javac.link.javaApi.jdk8}</documented.javac.link.javaApi>
 		<documented.name>SemanticCMS News Renderer HTML²</documented.name>
 		<documented.shortTitle>Renderer HTML</documented.shortTitle>
 		<documented.description>SemanticCMS newsfeeds rendered as HTML in a Servlet environment.</documented.description>
