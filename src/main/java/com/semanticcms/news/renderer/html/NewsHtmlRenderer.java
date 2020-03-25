@@ -43,10 +43,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.NotImplementedException;
 
 final public class NewsHtmlRenderer {
 
-	@SuppressWarnings("deprecation")
 	public static void writeNewsImpl(
 		ServletContext servletContext,
 		HttpServletRequest request,
@@ -113,7 +113,7 @@ final public class NewsHtmlRenderer {
 			} else {
 				// Capture required, even if capturing self
 				// TODO: This would cause unbound recursion and stack overflow at this time, there may be a complicate workaround when needed, such as not running this element on the recursive capture
-				if(targetPageRef.equals(currentPageRef)) throw new com.aoindustries.exception.NotImplementedException("Forward reference to element in same page not supported yet");
+				if(targetPageRef.equals(currentPageRef)) throw new NotImplementedException("Forward reference to element in same page not supported yet");
 				targetPage = CapturePage.capturePage(
 					servletContext,
 					request,
