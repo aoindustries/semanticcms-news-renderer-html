@@ -55,6 +55,11 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 		<tag>HEAD</tag>
 	</scm>
 
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/aoindustries/semanticcms-news-renderer-html/issues</url>
+	</issueManagement>
+
 	<profiles>
 		<profile>
 			<id>release</id>
