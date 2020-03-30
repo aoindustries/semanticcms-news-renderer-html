@@ -48,7 +48,6 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 	<inceptionYear>2016</inceptionYear>
 
 	<scm>
-		<!-- Can't inherit due to multi-module -->
 		<connection>scm:git:git://github.com/aoindustries/semanticcms-news-renderer-html.git</connection>
 		<developerConnection>scm:git:git@github.com:aoindustries/semanticcms-news-renderer-html.git</developerConnection>
 		<url>https://github.com/aoindustries/semanticcms-news-renderer-html</url>
