@@ -39,7 +39,7 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 		<shortTitle>Renderer HTML</shortTitle>
 		<description.html><![CDATA[<a target="${javadoc.target}" href="https://semanticcms.com/news/">SemanticCMS newsfeeds</a> rendered as HTML in a Servlet environment.]]></description.html>
 		<!-- Dependencies -->
-		<org.apache.commons.commons-lang3.version>3.10</org.apache.commons.commons-lang3.version>
+		<commons-lang3.version>3.10</commons-lang3.version>
 	</properties>
 
 	<name>SemanticCMS News Renderer HTML²</name>
@@ -65,6 +65,71 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 			<build>
 				<plugins>
 					<plugin>
+						<groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>unpack.offlinkLinks</id>
+								<phase>generate-sources</phase>
+								<goals><goal>unpack</goal></goals>
+								<configuration>
+									<artifactItems>
+										<!-- Direct -->
+										<artifactItem>
+											<groupId>com.aoindustries</groupId><artifactId>ao-encoding</artifactId>
+											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
+											<outputDirectory>${project.build.directory}/offlineLinks/com.aoindustries/ao-encoding</outputDirectory>
+										</artifactItem>
+										<artifactItem>
+											<groupId>com.aoindustries</groupId><artifactId>ao-fluent-html</artifactId>
+											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
+											<outputDirectory>${project.build.directory}/offlineLinks/com.aoindustries/ao-fluent-html</outputDirectory>
+										</artifactItem>
+										<artifactItem>
+											<groupId>com.aoindustries</groupId><artifactId>ao-net-types</artifactId>
+											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
+											<outputDirectory>${project.build.directory}/offlineLinks/com.aoindustries/ao-net-types</outputDirectory>
+										</artifactItem>
+										<artifactItem>
+											<groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId>
+											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
+											<outputDirectory>${project.build.directory}/offlineLinks/org.apache.commons/commons-lang3</outputDirectory>
+										</artifactItem>
+										<artifactItem>
+											<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-controller</artifactId>
+											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
+											<outputDirectory>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-core-controller</outputDirectory>
+										</artifactItem>
+										<artifactItem>
+											<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-model</artifactId>
+											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
+											<outputDirectory>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-core-model</outputDirectory>
+										</artifactItem>
+										<artifactItem>
+											<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-pages</artifactId>
+											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
+											<outputDirectory>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-core-pages</outputDirectory>
+										</artifactItem>
+										<artifactItem>
+											<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-pages-local</artifactId>
+											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
+											<outputDirectory>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-core-pages-local</outputDirectory>
+										</artifactItem>
+										<artifactItem>
+											<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-renderer-html</artifactId>
+											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
+											<outputDirectory>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-core-renderer-html</outputDirectory>
+										</artifactItem>
+										<artifactItem>
+											<groupId>com.semanticcms</groupId><artifactId>semanticcms-news-model</artifactId>
+											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
+											<outputDirectory>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-news-model</outputDirectory>
+										</artifactItem>
+									</artifactItems>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
 						<groupId>org.apache.maven.plugins</groupId><artifactId>maven-javadoc-plugin</artifactId>
 						<configuration>
 							<links>
@@ -72,17 +137,60 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 								<!-- Java EE -->
 								<link>${javadoc.link.javaee}</link>
 								<!-- Direct -->
-								<link>https://aoindustries.com/ao-encoding/apidocs/</link>
-								<link>https://aoindustries.com/ao-fluent-html/apidocs/</link>
-								<link>https://aoindustries.com/ao-net-types/apidocs/</link>
-								<link>https://commons.apache.org/proper/commons-lang/javadocs/api-${org.apache.commons.commons-lang3.version}/</link>
-								<!-- TODO: Once published: <link>https://semanticcms.com/core/controller/apidocs/</link> -->
-								<link>https://semanticcms.com/core/model/apidocs/</link>
-								<!-- TODO: Once published: <link>https://semanticcms.com/core/pages/apidocs/</link> -->
-								<!-- TODO: Once published: <link>https://semanticcms.com/core/pages/local/apidocs/</link> -->
-								<!-- TODO: Once published: <link>https://semanticcms.com/core/renderer/html/apidocs/</link> -->
-								<link>https://semanticcms.com/news/model/apidocs/</link>
+								<!-- offlineLink: <groupId>com.aoindustries</groupId><artifactId>ao-encoding</artifactId> -->
+								<!-- offlineLink: <groupId>com.aoindustries</groupId><artifactId>ao-fluent-html</artifactId> -->
+								<!-- offlineLink: <groupId>com.aoindustries</groupId><artifactId>ao-net-types</artifactId> -->
+								<!-- offlineLink: <groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId> -->
+								<!-- offlineLink: <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-controller</artifactId> -->
+								<!-- offlineLink: <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-model</artifactId> -->
+								<!-- offlineLink: <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-pages</artifactId> -->
+								<!-- offlineLink: <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-pages-local</artifactId> -->
+								<!-- offlineLink: <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-renderer-html</artifactId> -->
+								<!-- offlineLink: <groupId>com.semanticcms</groupId><artifactId>semanticcms-news-model</artifactId> -->
 							</links>
+							<offlineLinks>
+								<!-- Direct -->
+								<offlineLink>
+									<url>https://aoindustries.com/ao-encoding/apidocs/</url>
+									<location>${project.build.directory}/offlineLinks/com.aoindustries/ao-encoding</location>
+								</offlineLink>
+								<offlineLink>
+									<url>https://aoindustries.com/ao-fluent-html/apidocs/</url>
+									<location>${project.build.directory}/offlineLinks/com.aoindustries/ao-fluent-html</location>
+								</offlineLink>
+								<offlineLink>
+									<url>https://aoindustries.com/ao-net-types/apidocs/</url>
+									<location>${project.build.directory}/offlineLinks/com.aoindustries/ao-net-types</location>
+								</offlineLink>
+								<offlineLink>
+									<url>https://commons.apache.org/proper/commons-lang/javadocs/api-${commons-lang3.version}/</url>
+									<location>${project.build.directory}/offlineLinks/org.apache.commons/commons-lang3</location>
+								</offlineLink>
+								<offlineLink>
+									<url>https://semanticcms.com/core/controller/apidocs/</url>
+									<location>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-core-controller</location>
+								</offlineLink>
+								<offlineLink>
+									<url>https://semanticcms.com/core/model/apidocs/</url>
+									<location>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-core-model</location>
+								</offlineLink>
+								<offlineLink>
+									<url>https://semanticcms.com/core/pages/apidocs/</url>
+									<location>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-core-pages</location>
+								</offlineLink>
+								<offlineLink>
+									<url>https://semanticcms.com/core/pages/local/apidocs/</url>
+									<location>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-core-pages-local</location>
+								</offlineLink>
+								<offlineLink>
+									<url>https://semanticcms.com/core/renderer/html/apidocs/</url>
+									<location>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-core-renderer-html</location>
+								</offlineLink>
+								<offlineLink>
+									<url>https://semanticcms.com/news/model/apidocs/</url>
+									<location>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-news-model</location>
+								</offlineLink>
+							</offlineLinks>
 						</configuration>
 					</plugin>
 				</plugins>
@@ -109,7 +217,7 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 				<groupId>com.aoindustries</groupId><artifactId>ao-net-types</artifactId><version>1.2.1${POST-SNAPSHOT}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId><version>${org.apache.commons.commons-lang3.version}</version>
+				<groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId><version>${commons-lang3.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-controller</artifactId><version>2.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
