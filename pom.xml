@@ -92,6 +92,7 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
 											<outputDirectory>${project.build.directory}/offlineLinks/org.apache.commons/commons-lang3</outputDirectory>
 										</artifactItem>
+										<!-- ao-javadoc-offline: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId> -->
 										<artifactItem>
 											<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-controller</artifactId>
 											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
@@ -131,15 +132,6 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 						<groupId>org.apache.maven.plugins</groupId><artifactId>maven-javadoc-plugin</artifactId>
 						<configuration>
 							<offlineLinks>
-								<offlineLink>
-									<url>${javadoc.link.javase}</url>
-									<location>${project.build.directory}/offlineLinks/com/aoindustries/javadoc/offline/javase/${javase.release}</location>
-								</offlineLink>
-								<!-- Java EE -->
-								<offlineLink>
-									<url>${javadoc.link.javaee}</url>
-									<location>${project.build.directory}/offlineLinks/com/aoindustries/javadoc/offline/javaee/${javaee.version}</location>
-								</offlineLink>
 								<!-- Direct -->
 								<offlineLink>
 									<url>https://aoindustries.com/ao-encoding/apidocs/</url>
@@ -157,6 +149,7 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 									<url>https://commons.apache.org/proper/commons-lang/javadocs/api-${commons-lang3.version}/</url>
 									<location>${project.build.directory}/offlineLinks/org.apache.commons/commons-lang3</location>
 								</offlineLink>
+								<!-- Java EE: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId> -->
 								<offlineLink>
 									<url>https://semanticcms.com/core/controller/apidocs/</url>
 									<location>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-core-controller</location>
@@ -181,6 +174,16 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 									<url>https://semanticcms.com/news/model/apidocs/</url>
 									<location>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-news-model</location>
 								</offlineLink>
+								<!-- Java SE -->
+								<offlineLink>
+									<url>${javadoc.link.javase}</url>
+									<location>${project.build.directory}/offlineLinks/com/aoindustries/javadoc/offline/javase/${javase.release}</location>
+								</offlineLink>
+								<!-- Java EE -->
+								<offlineLink>
+									<url>${javadoc.link.javaee}</url>
+									<location>${project.build.directory}/offlineLinks/com/aoindustries/javadoc/offline/javaee/${javaee.version}</location>
+								</offlineLink>
 							</offlineLinks>
 						</configuration>
 					</plugin>
@@ -191,12 +194,6 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 
 	<dependencyManagement>
 		<dependencies>
-			<!-- Java EE -->
-			<dependency>
-				<groupId>com.aoindustries</groupId><artifactId>javaee-web-api-bom</artifactId><version>6.0.1${POST-SNAPSHOT}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
 			<!-- Direct -->
 			<dependency>
 				<groupId>com.aoindustries</groupId><artifactId>ao-encoding</artifactId><version>3.0.0${POST-SNAPSHOT}</version>
@@ -210,6 +207,7 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 			<dependency>
 				<groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId><version>${commons-lang3.version}</version>
 			</dependency>
+			<!-- javaee-web-api-bom: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId> -->
 			<dependency>
 				<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-controller</artifactId><version>2.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
 			</dependency>
@@ -228,15 +226,16 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 			<dependency>
 				<groupId>com.semanticcms</groupId><artifactId>semanticcms-news-model</artifactId><version>2.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
 			</dependency>
+			<!-- BOM -->
+			<dependency>
+				<groupId>com.aoindustries</groupId><artifactId>javaee-web-api-bom</artifactId><version>6.0.1${POST-SNAPSHOT}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
-		<!-- Java EE -->
-		<dependency>
-			<groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
 		<!-- Direct -->
 		<dependency>
 			<groupId>com.aoindustries</groupId><artifactId>ao-encoding</artifactId>
@@ -249,6 +248,9 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-controller</artifactId>
