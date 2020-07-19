@@ -39,7 +39,7 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 		<shortTitle>Renderer HTML</shortTitle>
 		<description.html><![CDATA[<a target="${javadoc.target}" href="https://semanticcms.com/news/">SemanticCMS newsfeeds</a> rendered as HTML in a Servlet environment.]]></description.html>
 		<!-- Dependencies -->
-		<commons-lang3.version>3.10</commons-lang3.version>
+		<commons-lang3.version>3.11</commons-lang3.version>
 	</properties>
 
 	<name>SemanticCMS News Renderer HTML²</name>
