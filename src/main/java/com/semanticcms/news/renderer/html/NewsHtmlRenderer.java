@@ -91,66 +91,93 @@ final public class NewsHtmlRenderer {
 					news.getTargetPage()
 				);
 			}
+			final BookRef targetBookRef = targetPageRef.getBookRef();
 			// Add page links
 			// TODO: Allow view="news" somehow in the "what-links-here", as-is news elements are hidden and don't show.
 			//       Or show news elements but they link to "news" view (when present).
 			//       Would have to check all views for what-links-here, but it could work?
 			news.addPageLink(targetPageRef);
-			// The target page will be null when in a missing book
-			final BookRef targetBookRef = targetPageRef.getBookRef();
-			Page targetPage;
-			if(!SemanticCMS.getInstance(servletContext).getBook(targetBookRef).isAccessible()) {
-				targetPage = null;
-			} else if(
-				// Short-cut for element already added above within current page
-				targetPageRef.equals(currentPageRef)
-				&& (
-					news.getElement()==null
-					|| currentPage.getElementsById().containsKey(news.getElement())
-				)
-			) {
-				targetPage = currentPage;
-			} else {
-				// Capture required, even if capturing self
-				// TODO: This would cause unbound recursion and stack overflow at this time, there may be a complicate workaround when needed, such as not running this element on the recursive capture
-				if(targetPageRef.equals(currentPageRef)) throw new NotImplementedException("Forward reference to element in same page not supported yet");
-				targetPage = CapturePage.capturePage(
-					servletContext,
-					request,
-					response,
-					targetPageRef,
-					news.getElement()==null ? CaptureLevel.PAGE : CaptureLevel.META
-				);
-			}
-			// Find the optional target element, may remain null when in missing book
-			Element targetElement;
-			if(news.getElement() == null) {
-				// TODO: Locating the default targetElement based on parent element should be done after page element IDs
-				//       are generated and before the News element is frozen.  As-is, the default targetElement is only
-				//       set by the "renderer" layer, which may or may not happen in future releases when renderers are
-				//       a distinct different layer than the model and capture.
-				if(news.getBook() == null && news.getTargetPage() == null) {
-					Element parentElem = news.getParentElement();
-					if(parentElem != null) {
-						// Default to parent of current element
-						targetElement = parentElem;
-						news.setElement(targetElement.getId());
+			String newsElement = news.getElement();
+			String newsTitle = news.getTitle();
+			if(newsElement == null || newsTitle == null) {
+				// The target page will be null when in a missing book
+				Page targetPage;
+				if(!SemanticCMS.getInstance(servletContext).getBook(targetBookRef).isAccessible()) {
+					targetPage = null;
+				} else if(
+					// Short-cut for element already added above within current page
+					targetPageRef.equals(currentPageRef)
+					&& (
+						newsElement == null
+						|| currentPage.getElementsById().containsKey(newsElement)
+					)
+				) {
+					targetPage = currentPage;
+				} else {
+					// Capture required, even if capturing self
+					// TODO: This would cause unbound recursion and stack overflow at this time, there may be a complicate workaround when needed, such as not running this element on the recursive capture
+					if(targetPageRef.equals(currentPageRef)) throw new NotImplementedException("Forward reference to element in same page not supported yet");
+					targetPage = CapturePage.capturePage(
+						servletContext,
+						request,
+						response,
+						targetPageRef,
+						newsElement == null ? CaptureLevel.PAGE : CaptureLevel.META
+					);
+				}
+				// Find the optional target element, may remain null when in missing book
+				Element targetElement;
+				if(newsElement == null) {
+					// TODO: Locating the default targetElement based on parent element should be done after page element IDs
+					//       are generated and before the News element is frozen.  As-is, the default targetElement is only
+					//       set by the "renderer" layer, which may or may not happen in future releases when renderers are
+					//       a distinct different layer than the model and capture.
+					if(news.getBook() == null && news.getTargetPage() == null) {
+						Element parentElem = news.getParentElement();
+						if(parentElem != null) {
+							// Default to parent of current element
+							targetElement = parentElem;
+							newsElement = targetElement.getId();
+							news.setElement(newsElement);
+						} else {
+							// No current element
+							targetElement = null;
+						}
 					} else {
-						// No current element
+						// No element since book and/or page provided
 						targetElement = null;
 					}
 				} else {
-					// No element since book and/or page provided
-					targetElement = null;
+					// Find the element
+					if(targetPage != null) {
+						targetElement = targetPage.getElementsById().get(newsElement);
+						if(targetElement == null) throw new ServletException("Element not found in target page: " + newsElement);
+						if(targetPage.getGeneratedIds().contains(newsElement)) throw new ServletException("Not allowed to link to a generated element id, set an explicit id on the target element: " + newsElement);
+					} else {
+						targetElement = null;
+					}
 				}
-			} else {
-				// Find the element
-				if(targetPage != null) {
-					targetElement = targetPage.getElementsById().get(news.getElement());
-					if(targetElement == null) throw new ServletException("Element not found in target page: " + news.getElement());
-					if(targetPage.getGeneratedIds().contains(news.getElement())) throw new ServletException("Not allowed to link to a generated element id, set an explicit id on the target element: " + news.getElement());
-				} else {
-					targetElement = null;
+				// Find the title if not set
+				if(newsTitle == null) {
+					String title;
+					if(newsElement != null) {
+						if(targetElement == null) {
+							// Element in missing book
+							title = LinkRenderer.getBrokenPath(targetPageRef, newsElement);
+						} else {
+							title = targetElement.getLabel();
+							if(title == null || title.isEmpty()) throw new IllegalStateException("No label from targetElement: " + targetElement);
+						}
+					} else {
+						if(targetPage == null) {
+							// Page in missing book
+							title = LinkRenderer.getBrokenPath(targetPageRef);
+						} else {
+							title = targetPage.getTitle();
+						}
+					}
+					newsTitle = title;
+					news.setTitle(newsTitle);
 				}
 			}
 			// Set book and targetPage always, since news is used from views on other pages
@@ -158,27 +185,6 @@ final public class NewsHtmlRenderer {
 			news.setDomain(targetBookRef.getDomain());
 			news.setBook(targetBookRef.getPath());
 			news.setTargetPage(targetPageRef.getPath().toString());
-			// Find the title if not set
-			if(news.getTitle() == null) {
-				String title;
-				if(news.getElement() != null) {
-					if(targetElement == null) {
-						// Element in missing book
-						title = LinkRenderer.getBrokenPath(targetPageRef, news.getElement());
-					} else {
-						title = targetElement.getLabel();
-						if(title == null || title.isEmpty()) throw new IllegalStateException("No label from targetElement: " + targetElement);
-					}
-				} else {
-					if(targetPage == null) {
-						// Page in missing book
-						title = LinkRenderer.getBrokenPath(targetPageRef);
-					} else {
-						title = targetPage.getTitle();
-					}
-				}
-				news.setTitle(title);
-			}
 			if(captureLevel == CaptureLevel.BODY) {
 				// Write an empty div so links to this news ID work
 				String refId = PageIndex.getRefIdInPage(request, currentPage, news.getId());
