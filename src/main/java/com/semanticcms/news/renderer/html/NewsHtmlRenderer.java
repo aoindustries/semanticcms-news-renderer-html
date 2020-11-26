@@ -125,6 +125,10 @@ final public class NewsHtmlRenderer {
 			// Find the optional target element, may remain null when in missing book
 			Element targetElement;
 			if(news.getElement() == null) {
+				// TODO: Locating the default targetElement based on parent element should be done after page element IDs
+				//       are generated and before the News element is frozen.  As-is, the default targetElement is only
+				//       set by the "renderer" layer, which may or may not happen in future releases when renderers are
+				//       a distinct different layer than the model and capture.
 				if(news.getBook() == null && news.getTargetPage() == null) {
 					Element parentElem = news.getParentElement();
 					if(parentElem != null) {
