@@ -123,6 +123,11 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
 											<outputDirectory>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-news-model</outputDirectory>
 										</artifactItem>
+										<artifactItem>
+											<groupId>com.semanticcms</groupId><artifactId>semanticcms-section-renderer-html</artifactId>
+											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
+											<outputDirectory>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-section-renderer-html</outputDirectory>
+										</artifactItem>
 									</artifactItems>
 								</configuration>
 							</execution>
@@ -173,6 +178,10 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 								<offlineLink>
 									<url>https://semanticcms.com/news/model/apidocs/</url>
 									<location>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-news-model</location>
+								</offlineLink>
+								<offlineLink>
+									<url>https://semanticcms.com/section/renderer/html/apidocs/</url>
+									<location>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-section-renderer-html</location>
 								</offlineLink>
 								<!-- Java SE -->
 								<offlineLink>
@@ -225,6 +234,9 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 			</dependency>
 			<dependency>
 				<groupId>com.semanticcms</groupId><artifactId>semanticcms-news-model</artifactId><version>2.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
+			</dependency>
+			<dependency>
+				<groupId>com.semanticcms</groupId><artifactId>semanticcms-section-renderer-html</artifactId><version>2.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
 			</dependency>
 			<!-- Transitive -->
 			<dependency>
@@ -284,6 +296,7 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 			<dependency>
 				<groupId>joda-time</groupId><artifactId>joda-time</artifactId><version>2.10.8</version>
 			</dependency>
+			<!-- javaee-web-api-bom: <groupId>javax.servlet</groupId><artifactId>jstl</artifactId> -->
 			<dependency>
 				<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-renderer</artifactId><version>2.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
 			</dependency>
@@ -293,6 +306,17 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 			<dependency>
 				<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-resources</artifactId><version>2.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
 			</dependency>
+			<dependency>
+				<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-taglib</artifactId><version>2.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
+			</dependency>
+			<dependency>
+				<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-servlet</artifactId><version>2.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
+			</dependency>
+			<dependency>
+				<groupId>com.semanticcms</groupId><artifactId>semanticcms-section-model</artifactId><version>2.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
+			</dependency>
+			<!-- Runtime Transitive -->
+			<!-- javaee-web-api-bom: <groupId>org.glassfish.web</groupId><artifactId>jstl-impl</artifactId> -->
 			<!-- BOM -->
 			<dependency>
 				<groupId>com.aoindustries</groupId><artifactId>javaee-web-api-bom</artifactId><version>6.0.1${POST-SNAPSHOT}</version>
@@ -336,6 +360,9 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 		</dependency>
 		<dependency>
 			<groupId>com.semanticcms</groupId><artifactId>semanticcms-news-model</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.semanticcms</groupId><artifactId>semanticcms-section-renderer-html</artifactId>
 		</dependency>
 	</dependencies>
 </project>

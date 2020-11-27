@@ -29,6 +29,7 @@ import com.semanticcms.core.controller.PageRefResolver;
 import com.semanticcms.core.controller.SemanticCMS;
 import com.semanticcms.core.model.BookRef;
 import com.semanticcms.core.model.Element;
+import com.semanticcms.core.model.ElementContext;
 import com.semanticcms.core.model.Page;
 import com.semanticcms.core.model.PageRef;
 import com.semanticcms.core.pages.CaptureLevel;
@@ -38,6 +39,7 @@ import com.semanticcms.core.pages.local.CurrentPage;
 import com.semanticcms.core.renderer.html.LinkRenderer;
 import com.semanticcms.core.renderer.html.PageIndex;
 import com.semanticcms.news.model.News;
+import com.semanticcms.section.renderer.html.SectionHtmlRenderer;
 import java.io.IOException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -47,11 +49,11 @@ import org.apache.commons.lang3.NotImplementedException;
 
 final public class NewsHtmlRenderer {
 
-	public static void writeNewsImpl(
+	// TODO: This should be in the servlet implementation, not in the renderer.  May be able to simplify dependencies.
+	public static void doBodyImpl(
 		ServletContext servletContext,
 		HttpServletRequest request,
 		HttpServletResponse response,
-		Html html,
 		News news
 	) throws ServletException, IOException {
 		// Get the current capture state
@@ -185,16 +187,32 @@ final public class NewsHtmlRenderer {
 			news.setDomain(targetBookRef.getDomain());
 			news.setBook(targetBookRef.getPath());
 			news.setTargetPage(targetPageRef.getPath().toString());
-			if(captureLevel == CaptureLevel.BODY) {
-				// Write an empty div so links to this news ID work
-				String refId = PageIndex.getRefIdInPage(request, currentPage, news.getId());
-				html.out.append("<div class=\"semanticcms-news-anchor\" id=\"");
-				encodeTextInXhtmlAttribute(refId, html.out);
-				html.out.append("\"></div>");
-				// TODO: Should we show the news entry here when no news view is active?
-				// TODO: Hide from tree views, or leave but link to "news" view when news view is active?
-			}
 		}
+	}
+
+	public static void writeNewsImpl(
+		HttpServletRequest request,
+		Html html,
+		ElementContext context,
+		News news,
+		PageIndex pageIndex
+	) throws ServletException, IOException {
+		Page page = news.getPage();
+		// Write table of contents before this, if needed on the page
+		try {
+			SectionHtmlRenderer.writeToc(request, html, context, page);
+		} catch(Error | RuntimeException | ServletException | IOException e) {
+			throw e;
+		} catch(Exception e) {
+			throw new ServletException(e);
+		}
+		// Write an empty div so links to this news ID work
+		String refId = PageIndex.getRefIdInPage(request, page, news.getId());
+		html.out.append("<div class=\"semanticcms-news-anchor\" id=\"");
+		encodeTextInXhtmlAttribute(refId, html.out);
+		html.out.append("\"></div>");
+		// TODO: Should we show the news entry here when no news view is active?
+		// TODO: Hide from tree views, or leave but link to "news" view when news view is active?
 	}
 
 	/**
