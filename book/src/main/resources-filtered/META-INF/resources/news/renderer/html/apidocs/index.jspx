@@ -35,7 +35,7 @@ along with semanticcms-news-renderer-html.  If not, see <http://www.gnu.org/lice
 		<ao:forward page="index.html" />
 	</c:if>
 	<core:page
-		title="@{documented.name} @{com.semanticcms:semanticcms-news-renderer-html:pom.version} API Docs"
+		title="@{documented.name} ${ao:getProjectVersion('./', 'com.semanticcms', 'semanticcms-news-renderer-html', '¿@{project.version}?')} API Docs"
 		shortTitle="API Docs"
 		datePublished="2017-08-26T17:25:01-0500"
 		dateModified="${ao:getLastModified('index.html')}"
