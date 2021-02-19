@@ -1,6 +1,6 @@
 /*
  * semanticcms-news-renderer-html - SemanticCMS newsfeeds rendered as HTML in a Servlet environment.
- * Copyright (C) 2016, 2017, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,7 +23,7 @@
 package com.semanticcms.news.renderer.html;
 
 import static com.aoindustries.encoding.TextInXhtmlAttributeEncoder.encodeTextInXhtmlAttribute;
-import com.aoindustries.html.Html;
+import com.aoindustries.html.Document;
 import com.semanticcms.core.controller.CapturePage;
 import com.semanticcms.core.controller.PageRefResolver;
 import com.semanticcms.core.controller.SemanticCMS;
@@ -192,7 +192,7 @@ final public class NewsHtmlRenderer {
 
 	public static void writeNewsImpl(
 		HttpServletRequest request,
-		Html html,
+		Document document,
 		ElementContext context,
 		News news,
 		PageIndex pageIndex
@@ -200,7 +200,7 @@ final public class NewsHtmlRenderer {
 		Page page = news.getPage();
 		// Write table of contents before this, if needed on the page
 		try {
-			SectionHtmlRenderer.writeToc(request, html, context, page);
+			SectionHtmlRenderer.writeToc(request, document, context, page);
 		} catch(Error | RuntimeException | ServletException | IOException e) {
 			throw e;
 		} catch(Exception e) {
@@ -208,9 +208,9 @@ final public class NewsHtmlRenderer {
 		}
 		// Write an empty div so links to this news ID work
 		String refId = PageIndex.getRefIdInPage(request, page, news.getId());
-		html.out.append("<div class=\"semanticcms-news-anchor\" id=\"");
-		encodeTextInXhtmlAttribute(refId, html.out);
-		html.out.append("\"></div>");
+		document.out.append("<div class=\"semanticcms-news-anchor\" id=\"");
+		encodeTextInXhtmlAttribute(refId, document.out);
+		document.out.append("\"></div>");
 		// TODO: Should we show the news entry here when no news view is active?
 		// TODO: Hide from tree views, or leave but link to "news" view when news view is active?
 	}
