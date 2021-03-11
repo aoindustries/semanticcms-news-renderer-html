@@ -22,6 +22,7 @@
  */
 package com.semanticcms.news.renderer.html;
 
+import com.aoindustries.html.AnyDocument;
 import com.aoindustries.html.DIV_factory;
 import com.aoindustries.html.NAV_factory;
 import com.aoindustries.html.PalpableContent;
@@ -192,9 +193,12 @@ final public class NewsHtmlRenderer {
 	}
 
 	/**
-	 * @param <__>  {@link PalpableContent} provides both {@link NAV_factory} and {@link DIV_factory}.
+	 * @param  <__>  {@link PalpableContent} provides both {@link NAV_factory} and {@link DIV_factory}.
 	 */
-	public static <__ extends PalpableContent<__>> void writeNewsImpl(
+	public static <
+		D extends AnyDocument<D>,
+		__ extends PalpableContent<D, __>
+	> void writeNewsImpl(
 		HttpServletRequest request,
 		__ content,
 		ElementContext context,
